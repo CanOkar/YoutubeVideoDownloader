@@ -74,10 +74,11 @@ class App(QWidget):
         self.show()
 
     def on_click_download(self):
-        start_download(self , QMessageBox, threading, YouTube, pytube)
+        start_download(self , QMessageBox, threading, YouTube, pytube, self.chooseresulation, self.downloadbutton)
 
     def on_click_check(self):
-        start_check(self, QMessageBox, threading, YouTube, urlretrieve, QPixmap)
+        start_check(self, QMessageBox, threading, YouTube, urlretrieve, QPixmap, self.namelabel, self.videothumb,
+                    self.chooseresulation, self.checkvideo)
 
     def on_click_browse(self):
         directory = QFileDialog.getExistingDirectory()
