@@ -1,6 +1,6 @@
 from pytube.exceptions import RegexMatchError
 # this function downloads videos
-def start_download(self, QMessageBox, threading, YouTube, pytube):
+def start_download(self, QMessageBox, threading, YouTube, pytube, chooseresulation, downloadbutton):
     videoAddressValue = self.videoaddress.text()
     downloadFolder = self.downloadpath.text()
 
@@ -36,12 +36,13 @@ def start_download(self, QMessageBox, threading, YouTube, pytube):
 
         # start download thread
 
-        download_thread = Download_thread(self.chooseresulation, self.downloadbutton)
+        download_thread = Download_thread(chooseresulation, downloadbutton)
         download_thread.start()
 
 
 # this function when a player hit the check button, fetchs downloadable items and pushes them into the combobox
-def start_check(self, QMessageBox, threading, YouTube, urlretrieve, QPixmap):
+def start_check(self, QMessageBox, threading, YouTube, urlretrieve, QPixmap, namelabel, videothumb,
+                chooseresulation, checkvideo):
     videoAddressValue = self.videoaddress.text()
 
     if videoAddressValue == "":
@@ -94,6 +95,5 @@ def start_check(self, QMessageBox, threading, YouTube, urlretrieve, QPixmap):
                     self.checkvideo.setText("Check Video")
                     self.checkvideo.setEnabled(True)
         # start check-video thread
-        check_video_thread = CheckvideoThread(self.namelabel, self.videothumb, self.chooseresulation,
-                                              self.checkvideo)
+        check_video_thread = CheckvideoThread(namelabel, videothumb, chooseresulation, checkvideo)
         check_video_thread.start()
