@@ -1,9 +1,8 @@
 from pytube.exceptions import RegexMatchError
 import threading
 import time
+
 # this function downloads videos
-
-
 def start_download(self, QMessageBox, threading, YouTube, pytube, chooseresulation, downloadbutton):
     videoAddressValue = self.videoaddress.text()
     downloadFolder = self.downloadpath.text()
