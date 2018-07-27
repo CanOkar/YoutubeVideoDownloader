@@ -64,16 +64,25 @@ def start_check(self, QMessageBox, YouTube, urlretrieve, QPixmap, namelabel, vid
                 try:
                     self.checkvideo.setText("Checking")
                     self.checkvideo.setEnabled(False)
+
                     yt = YouTube(videoAddressValue)
                     yt.streams.desc()
                     allStreams = yt.streams.all()
 
                     # display video's name
                     videoTitle = yt.title
+                    namelabel.setText(videoTitle)
 
                     # display video's thumbnail
                     thumbnail = yt.thumbnail_url
+                    urlretrieve(thumbnail, "img.jpg")
+                    thumb = QPixmap("img.jpg")
+                    videothumb.setPixmap(thumb)
 
+                    # clear earlier search results before adding new items
+                    chooseresulation.clear()
+
+                    # push new items into combobox
                     for i in allStreams:
                         if str(i.audio_codec) != "None" and str(i.resolution) != "None":
                             tocombobox = str(i.resolution) + " " + str(i.mime_type) + " " + str(i.fps) + " " + str(
@@ -81,10 +90,6 @@ def start_check(self, QMessageBox, YouTube, urlretrieve, QPixmap, namelabel, vid
                                          " " + str(i.audio_codec)
                             chooseresulation.addItem(tocombobox)
 
-                    namelabel.setText(videoTitle)
-                    urlretrieve(thumbnail, "img.jpg")
-                    thumb = QPixmap("img.jpg")
-                    videothumb.setPixmap(thumb)
                     self.checkvideo.setText("Check Video")
                     self.checkvideo.setEnabled(True)
 
